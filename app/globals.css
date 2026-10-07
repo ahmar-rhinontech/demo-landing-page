@@ -49,6 +49,37 @@ html::-webkit-scrollbar {
   .marquee { animation: none; }
 }
 
+/* Showcase conversation: 10s loop — cards fade in staggered, hold, fade out together */
+@keyframes showcase-card {
+  0% { opacity: 0; transform: translateY(10px); }
+  5%, 80% { opacity: 1; transform: translateY(0); }
+  90%, 100% { opacity: 0; transform: translateY(-6px); }
+}
+.showcase-card {
+  opacity: 0;
+  animation: showcase-card 10s ease-in-out infinite;
+}
+.showcase-card:nth-child(2) { animation-delay: 1.2s; }
+.showcase-card:nth-child(3) { animation-delay: 2.4s; }
+@media (prefers-reduced-motion: reduce) {
+  .showcase-card { animation: none; opacity: 1; }
+}
+
+/* Platform orbit: rings spin, tiles counter-spin so icons stay upright */
+@keyframes spin-cw {
+  to { transform: rotate(360deg); }
+}
+@keyframes spin-ccw {
+  to { transform: rotate(-360deg); }
+}
+.orbit { animation: spin-cw 40s linear infinite; }
+.orbit-reverse { animation: spin-ccw 28s linear infinite; }
+.orbit-tile { animation: spin-ccw 40s linear infinite; }
+.orbit-tile-reverse { animation: spin-cw 28s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .orbit, .orbit-reverse, .orbit-tile, .orbit-tile-reverse { animation: none; }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
